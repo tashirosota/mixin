@@ -6,7 +6,7 @@ defmodule Mixin do
   @default_undelegate_functions [:__info__, :module_info, :"MACRO-__using__"]
   @moduledoc """
   Delegates functions.
-  When dose not give opts, delegates all functions.
+  When no option is given, delegates all functions.
   ## opts
    - `except`: Excepts the functions to be delegated.
    - `only`: Selects the functions to be delegated.
