@@ -35,3 +35,40 @@ iex> defmodele ForDocBar do
 iex> ForDocBar.foo
 :foo
 ```
+
+## How is it better than import/2?
+
+**When import/2.**
+
+```elixir
+iex> defmodule A do
+...>   def a do
+...>     :a
+...>   end
+...> end
+
+iex> defmodule B do
+...>   import A
+...> end
+
+iex> B.a()
+** (UndefinedFunctionError) function B.a/0 is undefined or private
+```
+
+** When Mixin.include. **
+
+```elixir
+iex> defmodule A do
+...>   def a do
+...>     :a
+...>   end
+...> end
+
+iex> defmodule B do
+...>   require Mixin
+...>   Mixin.include A
+...> end
+
+iex> B.a()
+:a
+```
