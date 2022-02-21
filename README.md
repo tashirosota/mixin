@@ -20,20 +20,33 @@ def deps do
 end
 ```
 
-## Usage
+## Purpose and use cases
+
+It is common to use to divide the fat module into each context to improve readability.
+
+Let me give you an example.
+User Models are often bigger due to many functions and relationships due to their nature.
 
 ```elixir
-iex> defmodele ForDocFoo do
-...>   def foo, do: :foo
-...> end
+# lib/model/user.ex
+defmodule Model.User do
+  use Model
 
-iex> defmodele ForDocBar do
-...>   require Mixin
-...>   Mixin.include ForDocFoo
-...> end
+  @type t :: %__MODULE__{}
 
-iex> ForDocBar.foo
-:foo
+  @default_password
+
+  schema "users" do
+    field :disabled, :boolean, default: false
+    field :password_hash, :string
+    field :email, :string
+    has_one :profile, Model.Profile
+    has_one :wallet, Model.Wallet
+    has_many :articles, Model.Article
+    # ..etc
+    timestamps()
+  end
+end
 ```
 
 ## How is it better than import/2?

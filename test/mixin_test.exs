@@ -4,6 +4,7 @@ defmodule MixinTest do
 
   test "test" do
     assert Bar.foo() == Foo.foo()
+    assert 3 = Bar.sum(1, 2)
 
     assert_raise UndefinedFunctionError, fn ->
       Bar.undelegate_foo()
